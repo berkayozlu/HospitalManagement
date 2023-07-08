@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Receptionist Appointments</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+	<style>
+		body {
+			background-color: #f5f5dc;
+			font-family: Arial, sans-serif;
+		}
+
+		h1 {
+			text-align: center;
+			margin-top: 2rem;
+			margin-bottom: 2rem;
+		}
+
+		.alert {
+			text-align: center;
+			margin-bottom: 1rem;
+			font-weight: bold;
+		}
+	</style>
+</head>
+<body>
+<div class="container">
+	<hr>
+	<h1 class="text-center">Hospital Management System</h1>
+
+	<hr>
+	<div class="container">
+		Welcome! <span th:text="${username}"></span>
+	</div>
+	<h3 class="text-center">
+		<div th:if="${message}" th:text="${message}" th:class="${'alert ' + alertClass}"></div>
+	</h3>
+
+	<table class="table table-bordered table-hover">
+		<caption>End of Appointments</caption>
+		<thead>
+		<tr>
+			<th>AppointmentID</th>
+			<th>Patient Name</th>
+			<th>Doctor Name</th>
+			<th>Appointment Date</th>
+			<th>Confirmation</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr th:each="appointment : ${listAppointments}">
+			<td th:text="${appointment.appointment_id}"></td>
+			<td th:text="${appointment.patientName}"></td>
+			<td th:text="${appointment.doctorName}"></td>
+			<td th:text="${appointment.date}"></td>
+			<td>
+				<div th:if="${appointment.confirmed != 'confirmed'}">
+					<form action="#" th:action="@{/confirmit}">
+						<button type="submit" class="btn btn-success">Click to Confirm</button>
+					</form>
+				</div>
+				<span th:if="${appointment.confirmed == 'confirmed'}">Confirmed</span>
+			</td>
+		</tr>
+		</tbody>
+	</table>
+	<form th:action="@{/logout}">
+		<input type="submit" value="Logout" class="btn btn-primary">
+	</form>
+</div>
+</body>
+</html>

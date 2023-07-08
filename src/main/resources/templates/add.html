@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Book a new Appointment</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f5f5dc;
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        form {
+            margin-bottom: 2rem;
+        }
+
+        table {
+            padding: 10px;
+            margin: 0 auto;
+        }
+
+        td {
+            padding: 10px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Hospital Management System</h1>
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h1>Book a new Appointment</h1>
+            <br />
+            <form action="#" th:action="@{/save}" th:object="${appointment}">
+                <table class="table">
+                    <tr>
+                        <td>Patient name:</td>
+                        <td><input type="text" class="form-control" th:field="*{patientName}" /></td>
+                    </tr>
+                    <tr>
+                        <td>Doctor name:</td>
+                        <td><input type="text" class="form-control" th:field="*{doctorName}" /></td>
+                    </tr>
+                    <tr>
+                        <td>Date:</td>
+                        <td><input type="date" class="form-control" th:field="*{date}" /></td>
+                    </tr>
+                    <tr>
+                        <td>Do you need prescription?</td>
+                        <td><input type="text" class="form-control" th:field="*{prescription}" /></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><button type="submit" class="btn btn-primary">Save</button></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
