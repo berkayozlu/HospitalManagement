@@ -1,5 +1,17 @@
 version: "3"
 services:
+  mysqldb:
+    image: mysql:8.0
+    networks:
+      - springmysql-net
+    environment:
+      - MYSQL_ROOT_PASSWORD=test
+      - MYSQL_DATABASE=hospital
+      - MYSQL_USER=notroot
+      - MYSQL_PASSWORD=test
+    labels:
+      kompose.service.type: LoadBalancer
+
   server:
     image: hospital
     ports:
@@ -10,16 +22,10 @@ services:
       - springmysql-net
     depends_on:
       - mysqldb
-
-  mysqldb:
-    image: mysql:8.0
-    networks:
-      - springmysql-net
-    environment:
-      - MYSQL_ROOT_PASSWORD=test
-      - MYSQL_DATABASE=hospital
-      - MYSQL_USER=notroot
-      - MYSQL_PASSWORD=test
+    restart:
+      always
+    labels:
+      kompose.service.type: LoadBalancer
 
 networks:
   springmysql-net:

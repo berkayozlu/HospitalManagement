@@ -9,6 +9,7 @@ metadata:
     io.kompose.service: server
   name: server
 spec:
+  type: NodePort
   ports:
     - name: "8080"
       port: 8080
@@ -108,18 +109,24 @@ spec:
     spec:
       containers:
         - env:
-            - name: spring.datasource.url
+            - name: SPRING_DATASOURCE_URL
               value: "jdbc:mysql://mysqldb:3306/hospital"
-            - name: spring.datasource.username
-              value: root
-            - name: spring.datasource.password
+            - name: SPRING_DATASOURCE_USERNAME
+              value: notroot
+            - name: SPRING_DATASOURCE_PASSWORD
               value: test
-            - name: spring.thymeleaf.cache
+            - name: SPRING_THYMELEAF_CACHE
               value: "false"
-            - name: spring.jpa.properties.hibernate.dialect
+            - name: SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT
               value: org.hibernate.dialect.MySQL8Dialect
-            - name: spring.jpa.hibernate.ddl-auto
+            - name: SPRING_JPA_HIBERNATE_DDL_AUTO
               value: update
+            - name: DEBUG
+              value: "true"
+            - name: SERVER_ADDRESS
+              value: "0.0.0.0"
+            - name: SERVER_PORT
+              value: "8080"
           image: hospital
           name: server
           imagePullPolicy: Never
